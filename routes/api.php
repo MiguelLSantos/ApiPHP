@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/teste', function(){
-    return 'Ola Mundo!';
-});
+Route::post('/createuser', [UserController::class, 'store']);
+Route::get('/showuser', [UserController::class, 'index']);
+Route::get('/showoneuser/{id}', [UserController::class, 'show']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
