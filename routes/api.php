@@ -17,6 +17,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/createiten', [ItenController::class, 'store']);
 Route::get('/showitens', [ItenController::class, 'index']);
 Route::get('/showoneiten/{id}', [ItenController::class, 'show']);
+Route::put('/editeiten/{id}', [ItenController::class, 'update']);
 
 
 

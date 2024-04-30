@@ -36,7 +36,10 @@ class ItenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $selectIten = Iten::find($id);
+        $selectIten->update($request->all());
+
+        return $selectIten;
     }
 
     /**
@@ -44,6 +47,6 @@ class ItenController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return Iten::destroy($id);
     }
 }
