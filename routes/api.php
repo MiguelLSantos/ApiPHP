@@ -18,7 +18,7 @@ Route::post('/createiten', [ItenController::class, 'store']);
 Route::get('/showitens', [ItenController::class, 'index']);
 Route::get('/showoneiten/{id}', [ItenController::class, 'show']);
 Route::put('/editeiten/{id}', [ItenController::class, 'update']);
-
+Route::delete('/deleteiten/{id}', [ItenController::class, 'destroy']);
 
 
 

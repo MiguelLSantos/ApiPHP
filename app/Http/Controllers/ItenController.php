@@ -28,7 +28,7 @@ class ItenController extends Controller
      */
     public function show(string $id)
     {
-        return Iten::find($id);
+        return Iten::findOrFail($id);
     }
 
     /**
@@ -36,7 +36,7 @@ class ItenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $selectIten = Iten::find($id);
+        $selectIten = Iten::findOrFail($id);
         $selectIten->update($request->all());
 
         return $selectIten;
