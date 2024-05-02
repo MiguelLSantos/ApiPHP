@@ -9,18 +9,21 @@ use Illuminate\Support\Facades\Route;
 
 // Rotas de Usuário
 Route::post('/createuser', [UserController::class, 'store']); // Cadastro
-Route::get('/showuser', [UserController::class, 'index']);// Ver todos os usuários
-Route::get('/showoneuser/{id}', [UserController::class, 'show']); // Ver apeans um usuário
 Route::post('/login', [LoginController::class, 'login']); // Login
-Route::post('/logout', [LoginController::class, 'logout']);// Logout
 Route::get('/token/{id}', [LoginController::class, 'tokenById']);// Pega o token pelo id
 
-// Rotas de Itens
-Route::post('/createiten', [ItenController::class, 'store']);
-Route::get('/showitens', [ItenController::class, 'index']);
-Route::get('/showoneiten/{id}', [ItenController::class, 'show']);
-Route::put('/editeiten/{id}', [ItenController::class, 'update']);
-Route::delete('/deleteiten/{id}', [ItenController::class, 'destroy']);
+Route::group(['middleware' => ['apiJWT']], function(){
+    Route::post('/logout', [LoginController::class, 'logout']);// Logout
+    Route::get('/showuser', [UserController::class, 'index']);// Ver todos os usuários
+    Route::get('/showoneuser/{id}', [UserController::class, 'show']); // Ver apeans um usuário
+    // Rotas de Itens
+    Route::post('/createiten', [ItenController::class, 'store']);
+    Route::get('/showitens', [ItenController::class, 'index']);
+    Route::get('/showoneiten/{id}', [ItenController::class, 'show']);
+    Route::put('/editeiten/{id}', [ItenController::class, 'update']);
+    Route::delete('/deleteiten/{id}', [ItenController::class, 'destroy']);
+});
+
 
 
 
