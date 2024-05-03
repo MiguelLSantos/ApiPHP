@@ -5,8 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Tymon\JWTauth\Http\Middleware\BaseMiddleware;
-use Tymon\JWTauth\Facades\JWTauth;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 
 class apiProtectRoutes extends BaseMiddleware
 {
@@ -19,20 +19,16 @@ class apiProtectRoutes extends BaseMiddleware
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
-
-            if (!$user->active) {
-                return response()->json(['message' => 'User is inactive']);
-            }
         } catch (\Exception $e) {
 
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
 
-                return response()->json(['message' => 'Token is invalid']);
+                return response()->json(['message' => 'Token invalido']);
             } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
 
-                return response()->json(['message' => 'Token is expired']);
+                return response()->json(['message' => 'Token expirado']);
             } else {
-                return response()->json(['message' => 'Authorization Token not found']);
+                return response()->json(['message' => 'Token de autorização não encontrado']);
             }
         }
         return $next($request);

@@ -17,11 +17,11 @@ Route::group(['middleware' => ['apiJWT']], function(){
     Route::get('/showuser', [UserController::class, 'index']);// Ver todos os usuários
     Route::get('/showoneuser/{id}', [UserController::class, 'show']); // Ver apeans um usuário
     // Rotas de Itens
-    Route::post('/createiten', [ItenController::class, 'store']);
-    Route::get('/showitens', [ItenController::class, 'index']);
-    Route::get('/showoneiten/{id}', [ItenController::class, 'show']);
-    Route::put('/editeiten/{id}', [ItenController::class, 'update']);
-    Route::delete('/deleteiten/{id}', [ItenController::class, 'destroy']);
+    Route::post('/createiten', [ItenController::class, 'store']); // Criação de iten
+    Route::get('/showitens', [ItenController::class, 'index']);// Ver todos os itens
+    Route::get('/showoneiten/{id}', [ItenController::class, 'show']);// Ver apeans um iten
+    Route::put('/editeiten/{id}', [ItenController::class, 'update']); // Edita o iten
+    Route::delete('/deleteiten/{id}', [ItenController::class, 'destroy']);// Deleta o iten
 });
 
 
