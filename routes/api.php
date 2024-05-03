@@ -1,11 +1,21 @@
 <?php
 
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ItenController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+// Rotas da empresa;
+Route::post('/createempresa', [EmpresaController::class, 'store']); // Criação da empresa
+Route::get('/showempresas', [EmpresaController::class, 'index']); // Ver todas as empresa
+Route::get('/showoneempresa/{id}', [EmpresaController::class, 'show']); // Ver apeans uma empresa
+Route::put('/editeempresa/{id}', [EmpresaController::class, 'update']); // Edita a empresa
+Route::delete('/deleteempresa/{id}', [EmpresaController::class, 'destroy']); // Deleta a empresa
+Route::get('/showoneempresaf/{id}', [EmpresaController::class, 'showFuncionarios']); // Ver todos os funcionarios da empresa
+
 
 // Rotas de Usuário
 Route::post('/createuser', [UserController::class, 'store']); // Cadastro

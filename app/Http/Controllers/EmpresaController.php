@@ -1,50 +1,53 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
-use App\Models\User;
 
-class UserController extends Controller
+use App\Models\Empresa;
+use App\Models\User;
+use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Cast\String_;
+
+class EmpresaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return User::all();
+        return Empresa::all();
     }
 
     /**
      * Store a newly created resource in storage.
      */
-public function store(Request $request)
-{
-    $data = $request->all();
-
-    return User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => Hash::make($data['password']),
-        'empresa_id' => $data['empresa_id'],
-    ]);
-}
-
+    public function store(Request $request)
+    {
+        return Empresa::create($request->all());
+    }
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        return User::find($id);
+        return Empresa::findOrFail($id);
     }
+
+    public function showFuncionarios(string $id)
+    {
+        return User::where('empresa_id', $id)->get();
+    }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $selectIten = Empresa::findOrFail($id);
+        $selectIten->update($request->all());
+
+        return $selectIten;
     }
 
     /**
@@ -52,6 +55,6 @@ public function store(Request $request)
      */
     public function destroy(string $id)
     {
-        //
+        return Empresa::destroy($id);
     }
 }
