@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empresa;
+use App\Models\Iten;
 use App\Models\User;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\Cast\String_;
@@ -36,6 +37,21 @@ class EmpresaController extends Controller
     public function showFuncionarios(string $id)
     {
         return User::where('empresa_id', $id)->get();
+    }
+
+    public function showItens(string $id)
+    {
+        $empresa = Empresa::find($id);
+        if (is_null($empresa)) {
+            return 'Empresa não encontrado';
+        } else {
+            $itens = Iten::where('empresa_id', $id)->get();
+            if ($itens->isEmpty()) {
+                return 'Empresa não tem itens cadastrados';
+            } else {
+                return $itens;
+            }
+        }
     }
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Iten;
+use App\Models\User;
 
 class ItenController extends Controller
 {
@@ -18,9 +19,21 @@ class ItenController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
-        return Iten::create($request->all());
+        $user = User::findOrFail($id);
+        $credenciais = $user->only(['id', 'empresa_id']);
+        $data = $request->all();
+        return Iten::create([
+            'codigo' => $data['codigo'],
+            'nome' => $data['nome'],
+            'categoria' => $data['categoria'],
+            'descricao' => $data['descricao'],
+            'preco' => $data['preco'],
+            'qtdunitaria' => $data['qtdunitaria'],
+            'user_id' => $credenciais['id'],
+            'empresa_id' => $credenciais['empresa_id'],
+        ]);
     }
 
     /**

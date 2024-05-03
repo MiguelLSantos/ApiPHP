@@ -16,6 +16,8 @@ class Iten extends Model
         'descricao',
         'preco',
         'qtdunitaria',
+        'user_id',
+        'empresa_id',
     ];
 
 }

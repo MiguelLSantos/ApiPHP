@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Iten;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
+
+use function PHPUnit\Framework\isEmpty;
+use function PHPUnit\Framework\isNull;
 
 class UserController extends Controller
 {
@@ -37,6 +42,20 @@ public function store(Request $request)
     public function show(string $id)
     {
         return User::find($id);
+    }
+    public function showItens(string $id)
+    {
+        $user = User::find($id);
+        if (is_null($user)) {
+            return 'Usuário não encontrado';
+        } else {
+            $itens = Iten::where('user_id', $id)->get();
+            if ($itens->isEmpty()) {
+                return 'Usuário não tem itens cadastrados';
+            } else {
+                return $itens;
+            }
+        }
     }
 
     /**
