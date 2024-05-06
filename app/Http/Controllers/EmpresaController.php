@@ -38,6 +38,12 @@ class EmpresaController extends Controller
     {
         return User::where('empresa_id', $id)->get();
     }
+    public function showFuncionariosGerentes(string $id)
+    {
+        $users =  User::where('empresa_id', $id)->get();
+
+        return  $users->where('is_gerente', 1);
+    }
 
     public function showItens(string $id)
     {
