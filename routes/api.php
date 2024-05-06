@@ -21,9 +21,10 @@ Route::get('/showoneempresafg/{id}', [EmpresaController::class, 'showFuncionario
 // Rotas de Usuário
 Route::post('/createuser', [UserController::class, 'store']); // Cadastro
 Route::post('/login', [LoginController::class, 'login']); // Login
-Route::get('/token/{id}', [LoginController::class, 'tokenById']);// Pega o token pelo id
+Route::get('/token/{id}', [LoginController::class, 'tokenById']); // Pega o token pelo id
 
 Route::group(['middleware' => ['apiJWT']], function(){
+    Route::get('/tokenuser', [LoginController::class, 'getUserByToken']);
     Route::get('/showouseri/{id}', [UserController::class, 'showItens']);// Ver todos os itens do usuário
     Route::post('/logout', [LoginController::class, 'logout']);// Logout
     Route::get('/showuser', [UserController::class, 'index']);// Ver todos os usuários
