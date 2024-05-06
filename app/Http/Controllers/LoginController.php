@@ -14,7 +14,6 @@ class LoginController extends Controller
     {
         $user = User::query()->where('email', $request->email)->first();
         if (is_null($user)) {
-
             return response()->json([
                 'data' => [
                     'Status' => 'Usuario não encontrado!',
@@ -23,11 +22,14 @@ class LoginController extends Controller
         } else {
             if (Hash::check($request->password, $user->password)) {
                 $credenciais = $request->only(['email', 'password',]);
-
                 if (!$token = auth()->attempt($credenciais)) {
                     abort(401, 'Pode não!');
                 }
-                return response($token, 200);
+                // Retornar todos os dados do usuário junto com o token
+                return response()->json([
+                    'token' => $token,
+                    'user' => $user
+                ], 200);
             } else {
                 return response()->json([
                     'data' => [
@@ -37,6 +39,7 @@ class LoginController extends Controller
             }
         }
     }
+
 
     function getUserByToken()
     {
