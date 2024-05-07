@@ -15,7 +15,6 @@ Route::get('/showoneempresa/{id}', [EmpresaController::class, 'show']); // Ver a
 Route::put('/editeempresa/{id}', [EmpresaController::class, 'update']); // Edita a empresa
 Route::delete('/deleteempresa/{id}', [EmpresaController::class, 'destroy']); // Deleta a empresa
 Route::get('/showoneempresaf/{id}', [EmpresaController::class, 'showFuncionarios']); // Ver todos os funcionarios da empresa
-Route::get('/showoneempresai/{id}', [EmpresaController::class, 'showItens']); // Ver todos os itens da empresa
 Route::get('/showoneempresafg/{id}', [EmpresaController::class, 'showFuncionariosGerentes']);// Ver todos os funcionarios gerentes da empresa
 
 // Rotas de Usuário
@@ -23,7 +22,9 @@ Route::post('/createuser', [UserController::class, 'store']); // Cadastro
 Route::post('/login', [LoginController::class, 'login']); // Login
 Route::get('/token/{id}', [LoginController::class, 'tokenById']); // Pega o token pelo id
 
+
 Route::group(['middleware' => ['apiJWT']], function(){
+    Route::get('/showoneempresai/{id}', [EmpresaController::class, 'showItens']); // Ver todos os itens da empresa
     Route::get('/tokenuser', [LoginController::class, 'getUserByToken']);
     Route::get('/showouseri/{id}', [UserController::class, 'showItens']);// Ver todos os itens do usuário
     Route::post('/logout', [LoginController::class, 'logout']);// Logout

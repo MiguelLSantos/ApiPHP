@@ -55,7 +55,9 @@ class EmpresaController extends Controller
             if ($itens->isEmpty()) {
                 return 'Empresa não tem itens cadastrados';
             } else {
-                return $itens;
+                return response()->json([
+                    'itens' => $itens
+                ], 200);
             }
         }
     }

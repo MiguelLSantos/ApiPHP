@@ -67,8 +67,13 @@ class LoginController extends Controller
 
     public function logout()
     {
-        auth()->logout();
-        auth()->logout(true);
-        return response('deslogado com sucesso!', 200);
+        try {
+            auth()->logout();
+            auth()->logout(true);
+            return response('deslogado com sucesso!', 200);
+        } catch (\Throwable $th) {
+            return response('$th ', 401);
+        }
+
     }
 }
