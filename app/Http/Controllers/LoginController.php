@@ -35,7 +35,7 @@ class LoginController extends Controller
                     'data' => [
                         'Status' => 'Senha incoreta!',
                     ]
-                ], 404);
+                ], 401);
             }
         }
     }
@@ -67,7 +67,8 @@ class LoginController extends Controller
 
     public function logout()
     {
+        auth()->logout();
         auth()->logout(true);
-        return response()->json(['message' => 'Sucesso ao sair!']);
+        return response('deslogado com sucesso!', 200);
     }
 }
