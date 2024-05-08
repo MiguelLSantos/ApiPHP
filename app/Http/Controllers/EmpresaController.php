@@ -49,11 +49,15 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::find($id);
         if (is_null($empresa)) {
-            return 'Empresa não encontrado';
+            return response()->json([
+                'Erro' => 'Empresa não encontrado'
+            ], 404);
         } else {
             $itens = Iten::where('empresa_id', $id)->get();
             if ($itens->isEmpty()) {
-                return 'Empresa não tem itens cadastrados';
+                return response()->json([
+                    'Erro' => 'Empresa não tem itens cadastrados'
+                ], 401);
             } else {
                 return response()->json([
                     'itens' => $itens
