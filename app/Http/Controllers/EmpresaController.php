@@ -36,7 +36,9 @@ class EmpresaController extends Controller
 
     public function showFuncionarios(string $id)
     {
-        return User::where('empresa_id', $id)->get();
+        $users =
+            User::where('empresa_id', $id)->get();
+        return response()->json(['users' => $users ,],200);
     }
     public function showFuncionariosGerentes(string $id)
     {
