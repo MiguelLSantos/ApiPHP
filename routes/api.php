@@ -23,6 +23,7 @@ Route::post('/login', [LoginController::class, 'login']); // Login
 Route::get('/token/{id}', [LoginController::class, 'tokenById']); // Pega o token pelo id
 Route::group(['middleware' => ['apiJWT']], function () {
 
+    Route::put('/edituser/{id}', [UserController::class, 'update']); // Edita o funcionario
     Route::get('/showoneempresafg/{id}', [EmpresaController::class, 'showFuncionariosGerentes']); // Ver todos os funcionarios gerentes da empresa
     Route::get('/showoneempresaf/{id}', [EmpresaController::class, 'showFuncionarios']); // Ver todos os funcionarios da empresa
     Route::get('/showoneempresai/{id}', [EmpresaController::class, 'showItens']); // Ver todos os itens da empresa
