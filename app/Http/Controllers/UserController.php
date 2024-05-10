@@ -74,6 +74,18 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $userSelected = User::findOrFail($id);
+        $credenciaisSelected = $userSelected->only(['id', 'is_gerente']);
+
+        if ($credenciaisSelected['is_gerente'] == 1) {
+            return response()->json([
+                'Status' => 'Não é possivel remover um usuário gerente',
+            ], 403);
+        } else {
+            User::destroy($id);
+            return response()->json([
+                'Status' => 'Usuário removido com sucesso!',
+            ], 200);
+        }
     }
 }

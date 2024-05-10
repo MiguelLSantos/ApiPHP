@@ -31,6 +31,7 @@ Route::group(['middleware' => ['apiJWT']], function () {
     Route::post('/logout', [LoginController::class, 'logout']); // Logout
     Route::get('/showuser', [UserController::class, 'index']); // Ver todos os usuários
     Route::get('/showoneuser/{id}', [UserController::class, 'show']); // Ver apeans um usuário
+    Route::delete('/deleteuser/{id}', [UserController::class, 'destroy']); // Deleta um usuário
     // Rotas de Itens
     Route::post('/createiten/{id}', [ItenController::class, 'store']); // Criação de iten
     Route::get('/showitens', [ItenController::class, 'index']); // Ver todos os itens

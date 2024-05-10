@@ -54,7 +54,8 @@ class LoginController extends Controller
     public function tokenById(String $id)
     {
 
-        $token = auth()->tokenById($id);
+        $token =
+            auth()->tokenById($id);
         return response()->json([
             'data' => [
                 'Status' => 'Sucesso!',
@@ -74,6 +75,5 @@ class LoginController extends Controller
         } catch (\Throwable $th) {
             return response('$th ', 401);
         }
-
     }
 }
