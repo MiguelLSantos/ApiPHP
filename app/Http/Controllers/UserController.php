@@ -82,7 +82,8 @@ class UserController extends Controller
                 'Status' => 'Não é possivel remover um usuário gerente',
             ], 403);
         } else {
-            User::destroy($id);
+            $user = User::findOrFail($id);
+            $user->delete();
             return response()->json([
                 'Status' => 'Usuário removido com sucesso!',
             ], 200);
