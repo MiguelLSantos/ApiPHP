@@ -66,7 +66,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $selectUser= User::findOrFail($id);
+        $selectUser = User::findOrFail($id);
         $selectUser->update($request->all());
 
         return $selectUser;
@@ -80,16 +80,10 @@ class UserController extends Controller
         $userSelected = User::findOrFail($id);
         $credenciaisSelected = $userSelected->only(['id', 'is_gerente']);
 
-        if ($credenciaisSelected['is_gerente'] == 1) {
-            return response()->json([
-                'Status' => 'Não é possivel remover um usuário gerente',
-            ], 403);
-        } else {
-            $user = User::findOrFail($id);
-            $user->delete();
-            return response()->json([
-                'Status' => 'Usuário removido com sucesso!',
-            ], 200);
-        }
+        $user = User::findOrFail($id);
+        $user->delete();
+        return response()->json([
+            'Status' => 'Usuário removido com sucesso!',
+        ], 200);
     }
 }
