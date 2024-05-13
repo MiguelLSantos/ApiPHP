@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Iten;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Empresa;
 
 class ItenController extends Controller
 {
@@ -61,5 +63,26 @@ class ItenController extends Controller
     public function destroy(string $id)
     {
         return Iten::destroy($id);
+    }
+
+    public function gerarPDF(string $id)
+    {
+        $empresa = Empresa::find($id);
+        if (is_null($empresa)) {
+            return response()->json([
+                'Erro' => 'Empresa não encontrada'
+            ], 404);
+        } else {
+            $itens = Iten::where('empresa_id', $id)->get();
+            if ($itens->isEmpty()) {
+                return response()->json([
+                    'Erro' => 'Empresa não tem itens cadastrados'
+                ], 401);
+            } else {
+                $pdf = Pdf::loadView('pdf', ['itens' => $itens])->setPaper('a4', 'portrait');
+                return $pdf->download('relatorio_de_itens.pdf');
+            }
+        }
+
     }
 }

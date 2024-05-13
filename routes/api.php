@@ -16,6 +16,7 @@ Route::get('/showempresas', [EmpresaController::class, 'index']); // Ver todas a
 Route::get('/showoneempresa/{id}', [EmpresaController::class, 'show']); // Ver apeans uma empresa
 Route::put('/editeempresa/{id}', [EmpresaController::class, 'update']); // Edita a empresa
 Route::delete('/deleteempresa/{id}', [EmpresaController::class, 'destroy']); // Deleta a empresa
+Route::get('/pdf/{id}', [ItenController::class, 'gerarPDF']); // Gera o PDF dos itens
 
 // Rotas de Usuário
 Route::post('/createuser', [UserController::class, 'store']); // Cadastro
