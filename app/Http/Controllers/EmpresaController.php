@@ -52,7 +52,7 @@ class EmpresaController extends Controller
         $empresa = Empresa::find($id);
         if (is_null($empresa)) {
             return response()->json([
-                'Erro' => 'Empresa não encontrado'
+                'Erro' => 'Empresa não encontrada'
             ], 404);
         } else {
             $itens = Iten::where('empresa_id', $id)->get();
