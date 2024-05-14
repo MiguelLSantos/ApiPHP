@@ -80,7 +80,8 @@ class ItenController extends Controller
                 ], 401);
             } else {
                 $pdf = Pdf::loadView('pdf', ['itens' => $itens])->setPaper('a4', 'portrait');
-                return $pdf->download('relatorio_de_itens.pdf');
+                
+                return response()->json(base64_encode($pdf->output()));
             }
         }
 
