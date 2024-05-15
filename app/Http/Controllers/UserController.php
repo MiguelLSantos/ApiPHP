@@ -66,10 +66,17 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $user = auth()->user();
         $selectUser = User::findOrFail($id);
-        $selectUser->update($request->all());
-
-        return $selectUser;
+        $credenciais = $user->only(['is_gerente']);
+        if ($credenciais['is_gerente'] == '0') {
+            return response()->json([
+                'Erro' => 'Permição negada'
+            ], 404);
+        } else {
+            $selectUser->update($request->all());
+            return $selectUser;
+        }
     }
 
     /**

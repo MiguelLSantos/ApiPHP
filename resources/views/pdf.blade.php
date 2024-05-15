@@ -4,37 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Relatorio de itens</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <H1>Itens cadastrados</H1>
-    <table style="border-collapse: collapse; width: 100%;">
+    <figure>
+        <blockquote class="blockquote">
+            <h1>Relatorio de itens</h1>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            Total de {{ count($itens) }} itens cadastrados
+        </figcaption>
+    </figure>
+    <table class="table table-striped">
         <thead>
-            <tr style="background-color: #adb5bd">
-                <th style="border: 1px solid #ccc">Código</th>
-                <th style="border: 1px solid #ccc">Nome</th>
-                <th style="border: 1px solid #ccc">Descrição</th>
-                <th style="border: 1px solid #ccc">Categoria</th>
-                <th style="border: 1px solid #ccc">Preço</th>
-                <th style="border: 1px solid #ccc">Quantidade de Unidades</th>
+            <tr>
+                <th scope="row">Código</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Quantidade de Unidades</th>
             </tr>
         </thead>
         <tbody>
-
             @forelse ($itens as $item)
-            <tr>
-            <td style="border: 1px solid #aeadad; border-top: none">{{$item->codigo}}</td>
-            <td style="border: 1px solid #aeadad; border-top: none">{{$item->nome}}</td>
-            <td style="border: 1px solid #aeadad; border-top: none">{{$item->descricao}}</td>
-            <td style="border: 1px solid #aeadad; border-top: none">{{$item->categoria}}</td>
-            <td style="border: 1px solid #aeadad; border-top: none">{{$item->preco}}</td>
-            <td style="border: 1px solid #aeadad; border-top: none">{{$item->qtdunitaria}}</td>
-            </tr>
-
+                <tr>
+                    <td>{{ $item->codigo }}</td>
+                    <td>{{ $item->nome }}</td>
+                    <td>{{ $item->descricao }}</td>
+                    <td>{{ $item->categoria }}</td>
+                    <td>{{ $item->preco }}</td>
+                    <td>{{ $item->qtdunitaria }}</td>
+                </tr>
             @empty
-            <td colspan="4">Nenhum item cadastrado</td>
+                <tr>
+                    <td colspan="6">Nenhum item cadastrado</td>
+                </tr>
             @endforelse
         </tbody>
+    </table>
 </body>
 
 </html>
