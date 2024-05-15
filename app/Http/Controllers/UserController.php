@@ -68,6 +68,7 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $selectUser = User::findOrFail($id);
+
         $credenciais = $user->only(['is_gerente']);
         if ($credenciais['is_gerente'] == '0') {
             return response()->json([
