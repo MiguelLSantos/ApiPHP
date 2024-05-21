@@ -8,7 +8,7 @@ use App\Http\Controllers\ItenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // Rodar a API assim
-// php artisan serve --host=0.0.0.0 --port=8000
+// php artisan serve --host=192.168.0.104 --port=8000
 // Colocar o ip de minha maquina
 // Rotas da empresa;
 Route::post('/createempresa', [EmpresaController::class, 'store']); // Criação da empresa
